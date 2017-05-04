@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+
+  tests:
+    extends:
+      file: docker-compose.yml
+      service: base-app
+    command: yarn run test-watch
+    volumes:
+      - profiles-db-updater-tests-node_modules:/code/node_modules
+    environment:
+      NODE_ENV: test
+    links:
+    - mongo-db:mongo
+
+  mongo-db:
+    image: mongo:3.4
+    ports:
+      - 27017:27017
+volumes:
+  profiles-db-updater-tests-node_modules:
