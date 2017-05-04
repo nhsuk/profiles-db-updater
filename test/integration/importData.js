@@ -15,13 +15,13 @@ async function verifyCollection(minCount, name, done) {
   done();
 }
 
-// describe('data import', () => {
-//   it('should load the contents of a json file into mongodb', function test(done) {
-//     this.timeout(15000);
-//     importData('./data/gp-data-merged.json', 'gps3', config.mongodb.connectionString)
-//       .then(() => verifyCollection(9000, 'gps3', done)).catch(done);
-//   });
-// });
+describe('data import', () => {
+  it('should load the contents of a json file into mongodb', function test(done) {
+    this.timeout(15000);
+    importData('./data/gp-data-merged.json', 'gps3', config.mongodb.connectionString)
+      .then(() => verifyCollection(9000, 'gps3', done)).catch(done);
+  });
+});
 
 describe('data importer', () => {
   it('should load the contents of a json file into mongodb', function test(done) {

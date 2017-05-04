@@ -1,0 +1,24 @@
+sudo: required
+
+language: node_js
+node_js:
+  - node
+
+services:
+  - docker
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - ./scripts/ci-deployment/docker_ci.sh
+script:
+  - docker-compose -f docker-compose-tests.yml build tests
+  - docker-compose -f docker-compose-tests.yml run tests
+
+after_script:
+  - docker-compose -f docker-compose-tests.yml down -v
