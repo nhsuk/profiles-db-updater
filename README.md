@@ -1,5 +1,9 @@
 # Dockerised repo for loading GP profile data into a MongoDB container
 
+[![Build Status](https://travis-ci.org/nhsuk/profiles-db-updater.svg?branch=master)](https://travis-ci.org/nhsuk/profiles)
+[![Coverage Status](https://coveralls.io/repos/github/nhsuk/profiles-db-updater/badge.svg?branch=master)](https://coveralls.io/github/nhsuk/profiles?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/nhsuk/profiles-db-updater/badge.svg)](https://snyk.io/test/github/nhsuk/profiles)
+
 ## Merging data from multiple sources
 
 Currently there are 2 sources of data:
