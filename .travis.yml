@@ -18,8 +18,8 @@ after_success:
   - ./scripts/ci-deployment/docker_ci.sh
   
 script:
-  - docker-compose -f docker-compose-tests.yml build tests
-  - docker-compose -f docker-compose-tests.yml run tests
+  - docker-compose -f docker-compose-tests.yml build travis-tests
+  - docker-compose -f docker-compose-tests.yml run travis-tests
 
 after_script:
   - docker-compose -f docker-compose-tests.yml down -v

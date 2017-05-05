@@ -4,13 +4,26 @@
   "description": "Retrieves JSON from ETLs, combines the JSON and imports into mongodb",
   "main": "app.js",
   "scripts": {
+    "check-coverage": "istanbul check-coverage --config .istanbul.yml",
+    "check-unit-coverage": "istanbul check-coverage --config .istanbul.unit.yml",
+    "generate-unit-coverage": "yarn run istanbul -- cover _mocha -- --recursive test/unit",
+    "generate-coverage": "yarn run istanbul -- cover _mocha -- --recursive",
+    "git-hook": "yarn run lint && yarn run generate-unit-coverage && yarn run check-unit-coverage",
+    "istanbul": "NODE_ENV=test istanbul",
+    "lint": "eslint --ext .js,.json .",
+    "postrewrite": "yarn run git-hook",
+    "precommit": "yarn run git-hook",
+    "prepush": "yarn run git-hook",
+    "snyk": "snyk",
+    "snyk-travis": "yarn run snyk -- test --org=nhsuk && yarn run snyk -- monitor --org=nhsuk",
     "start": "node app.js",
+    "start-watch": "nodemon app.js | ./node_modules/bunyan/bin/bunyan & nodemon -e scss -x yarn run build-css -- compact",
     "test": "NODE_ENV=test mocha --recursive test",
     "test-unit": "NODE_ENV=test mocha --recursive test/unit",
     "test-integration": "NODE_ENV=test mocha --recursive test/integration",
     "test-watch": "yarn run test -- --watch --reporter min",
-    "generate-coverage": "yarn run istanbul -- cover _mocha -- --recursive",
-    "lint": "eslint --ext .js,.json ."
+    "travis": "yarn run lint && yarn run generate-coverage && yarn run check-coverage && yarn run upload-coverage-coveralls && yarn run snyk-travis",
+    "upload-coverage-coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "mongodb",
