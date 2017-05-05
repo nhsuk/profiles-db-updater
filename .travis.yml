@@ -16,6 +16,7 @@ before_install:
 after_success:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - ./scripts/ci-deployment/docker_ci.sh
+  
 script:
   - docker-compose -f docker-compose-tests.yml build tests
   - docker-compose -f docker-compose-tests.yml run tests

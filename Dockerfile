@@ -3,7 +3,7 @@ FROM node:7.9-alpine
 ENV USERNAME nodeuser
 
 RUN adduser -D "$USERNAME" && \
-    mkdir -p /code && \
+    mkdir -p /code/data && \
     chown "$USERNAME":"$USERNAME" /code
 
 USER $USERNAME
