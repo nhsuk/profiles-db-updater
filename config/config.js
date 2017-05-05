@@ -8,9 +8,10 @@ module.exports = {
     name: 'profiles-db-loader',
   },
   env: process.env.NODE_ENV || 'development',
-
+  GP_DATA_URL: process.env.GP_DATA_URL || 'http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json',
   OUTPUT_DIR: './data',
   OUTPUT_FILE: 'gp-data-merged.json',
+  GP_DATA_FILE: 'gp-data.json',
   INPUT_DIR: './input',
 
   mongodb: {
