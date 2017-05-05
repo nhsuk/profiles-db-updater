@@ -29,7 +29,7 @@ describe('data importer', () => {
     const importer = new DataImporter(config.mongodb.connectionString, 'gps2');
     importer.importData({ name: 'lol' }).then(() => verifyCollection(0, 'gps2', done)).catch(done);
   });
-  
+
   it('should throw exception if number of records greatly reduced', function test(done) {
     this.timeout(10000);
     const importer = new DataImporter(config.mongodb.connectionString, 'gps2');
