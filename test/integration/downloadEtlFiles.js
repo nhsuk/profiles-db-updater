@@ -7,7 +7,7 @@ const downloadEtlFiles = require('../../lib/downloadEtlFiles');
 
 describe('Download ETL files', () => {
   it('should download ETL file to input folder', function test(done) {
-    this.timeout(15000);
+    this.timeout(120000);
     downloadEtlFiles()
       .then(() => done()).catch(done);
   });
