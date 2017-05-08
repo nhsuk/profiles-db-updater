@@ -2,6 +2,8 @@ const host = process.env.MONGO_HOST || 'mongo';
 const port = process.env.MONGO_PORT || '27017';
 const db = process.env.MONGO_DB || 'profiles';
 const collection = process.env.MONGO_COLLECTION || 'gps';
+// percentage the records can drop by before erroring
+const threshold = process.env.CHANGE_THRESHOLD || 0.95;
 
 module.exports = {
   app: {
@@ -13,6 +15,7 @@ module.exports = {
   OUTPUT_FILE: 'gp-data-merged.json',
   GP_DATA_FILE: 'gp-data.json',
   INPUT_DIR: './input',
+  THRESHOLD: threshold,
 
   mongodb: {
     collection,

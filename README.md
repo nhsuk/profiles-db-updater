@@ -151,3 +151,19 @@ All other members will be present and populated.
 * List suppliers: `jq -c 'unique_by(.Supplier) | [.[].Supplier]' input/pomi.json`
 * Find single item by `odsCode`:
   `jq '.[] | select(.odsCode == "${odsCode}")' data/gp-data-merged.json`
+
+## Environment variables
+
+Environment variables are expected to be managed by the environment in which
+the application is being run. This is best practice as described by
+[twelve-factor](https://12factor.net/config).
+
+| Variable                         | Description                                                        | Default               | Required |
+|:---------------------------------|:-------------------------------------------------------------------|:----------------------|:---------|
+| `NODE_ENV`                       | node environment                                                   | development           |          |
+| `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
+| `MONGO_HOST`                     | host name on mongo server                                          | mongo                 |          |
+| `MONGO_PORT`                     | Port of mongo server                                               | 27017                 |          |
+| `MONGO_DB`                       | Mongo database to be updated                                       | profiles              |          |
+| `MONGO_COLLECTION`               | Mongo collection to be updated                                     | gps                   |          |
+| `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.95                  |          |

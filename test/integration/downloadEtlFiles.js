@@ -3,6 +3,7 @@ const fs = require('fs');
 const nock = require('nock');
 
 const downloadEtlFiles = require('../../lib/downloadEtlFiles');
+const fileHelper = require('../../lib/fileHelper');
 const config = require('../../config/config');
 
 const expect = chai.expect;
@@ -29,6 +30,22 @@ describe('Download ETL files', () => {
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(gpDataFile)).to.be.true;
+        // eslint-disable-next-line no-unused-expressions
+        expect(fileHelper.loadJson(gpDataFile)).to.be.defined;
+        done();
+      }).catch(done);
+  });
+
+  it('should not replace existing gp data if the url invalid', (done) => {
+    nock(config.GP_DATA_URL)
+      .get('')
+      .replyWithError('download throws error');
+    downloadEtlFiles()
+      .then(() => {
+        // eslint-disable-next-line no-unused-expressions
+        expect(fs.existsSync(gpDataFile)).to.be.true;
+        // eslint-disable-next-line no-unused-expressions
+        expect(fileHelper.loadJson(gpDataFile)).to.be.defined;
         done();
       }).catch(done);
   });
