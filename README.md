@@ -1,5 +1,8 @@
 # Dockerised repo for loading GP profile data into a MongoDB container
 
+The profiles-db-updater is a dockerised application that will update a mongo database on a regular basis from the output
+of the GP data and POMI data ETLs.
+
 ## Merging data from multiple sources
 
 Currently there are 2 sources of data:
@@ -8,10 +11,23 @@ Currently there are 2 sources of data:
 * Patient Online Management Information (POMI) data from NHSDigital's indicator
   portal. Handled by [pomi-data-etl](https://github.com/nhsuk/pomi-data-etl)
 
-The output from each process is added to `./input`. Executing `yarn start` will
-create a merged data set and save it in `./data` from where it will be loaded
-into the database. This happens during the CI build and the merged data set
-will be included in the generated docker image.
+The output from the GP Data ETL is hosted at `http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json`.
+This will be used as the source of the database update if the `gp-data.json` is available and is valid JSON.
+If these conditions are not met, the previous data will be used.
+
+The POMI data output json is not yet available at a URL, and is held as a local JSON file.
+
+The application will download, combine and enrich the ETL JSON, insert it into a mongodb database on startup, then on a daily
+schedule while the container continues to run. The time of day defaults to 7am, and can be changed via the `UPDATE_SCHEDULE` 
+environment variable.
+
+When updating the mongo database the new data will be inserted into a temporary collection, then validated against the
+existing collection. Once validation passes the existing collection will be deleted and the temporary collection renamed
+to take it's place.
+
+Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by 
+the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.95` which prevent the data being loaded if it 
+is 5% less than the previous count.
 
 ## Data structure
 
@@ -160,6 +176,7 @@ the application is being run. This is best practice as described by
 
 | Variable                         | Description                                                        | Default               | Required |
 |:---------------------------------|:-------------------------------------------------------------------|:----------------------|:---------|
+| `GP_DATA_URL`                    | URL of up to date GP data from Syndication                         | http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json||
 | `NODE_ENV`                       | node environment                                                   | development           |          |
 | `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
 | `MONGO_HOST`                     | host name on mongo server                                          | mongo                 |          |
