@@ -8,13 +8,17 @@ const config = require('../../config/config');
 
 const expect = chai.expect;
 
-const gpDataFile = `${config.INPUT_DIR}/${config.GP_DATA_FILE}`;
-
+const gpDataFile = `${config.INPUT_DIR}/${config.GP_DATA_FILE}.test`;
+const params = {
+  INPUT_DIR: config.INPUT_DIR,
+  GP_DATA_FILE: `${config.GP_DATA_FILE}.test`,
+  GP_DATA_URL: config.GP_DATA_URL,
+};
 
 describe('Download ETL files', () => {
   it('should download ETL file to input folder', function test(done) {
-    this.timeout(120000);
-    downloadEtlFiles()
+    this.timeout(150000);
+    downloadEtlFiles(params)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(gpDataFile)).to.be.true;
@@ -26,7 +30,8 @@ describe('Download ETL files', () => {
     nock(config.GP_DATA_URL)
       .get('')
       .reply(200, 'bad json');
-    downloadEtlFiles()
+
+    downloadEtlFiles(params)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(gpDataFile)).to.be.true;
@@ -40,7 +45,8 @@ describe('Download ETL files', () => {
     nock(config.GP_DATA_URL)
       .get('')
       .replyWithError('download throws error');
-    downloadEtlFiles()
+
+    downloadEtlFiles(params)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(gpDataFile)).to.be.true;
