@@ -9,7 +9,7 @@ RUN adduser -D "$USERNAME" && \
 USER $USERNAME
 WORKDIR /code
 
-COPY yarn.lock package.json /code/
+COPY .snyk yarn.lock package.json /code/
 RUN  yarn install --ignore-optional
 
 COPY . /code
