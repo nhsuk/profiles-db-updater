@@ -6,9 +6,8 @@ const expect = chai.expect;
 
 describe('File Helper', () => {
   describe('loadJson', () => {
-    it('should return undefined for missing file', () => {
-      // eslint-disable-next-line no-unused-expressions
-      expect(fileHelper.loadJson('noSuchFile')).to.be.undefined;
+    it('should return empty array for missing file', () => {
+      expect(fileHelper.loadJson('noSuchFile').length).to.equal(0);
     });
   });
 });

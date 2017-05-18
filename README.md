@@ -12,10 +12,15 @@ Currently there are 2 sources of data:
   portal. Handled by [pomi-data-etl](https://github.com/nhsuk/pomi-data-etl)
 
 The output from the GP Data ETL is hosted at `http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json`.
-This will be used as the source of the database update if the `gp-data.json` is available and is valid JSON.
-If these conditions are not met, the previous data will be used.
 
-The POMI data output json is not yet available at a URL, and is held as a local JSON file.
+The output files from the POMI DATA ETL are found at 
+`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/booking.json`,
+`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/scripts.json`
+`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/records.json`
+
+The online files will be used as the source of the database update if they are available, are valid JSON, and if the
+total count has not dropped by a significant amount as described in the `CHANGE_THRESHOLD` below.
+If these conditions are not met, the previously downloaded files will be used.
 
 The application will download, combine and enrich the ETL JSON, insert it into a mongodb database on startup, then on a daily
 schedule while the container continues to run. The time of day defaults to 7am, and can be changed via the `UPDATE_SCHEDULE` 
@@ -26,7 +31,7 @@ existing collection. Once validation passes the existing collection will be dele
 to take it's place.
 
 Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by 
-the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.95` which prevent the data being loaded if it 
+the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.95` which prevents the data being loaded if it 
 is 5% less than the previous count.
 
 ## Data structure
