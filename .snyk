@@ -1,0 +1,7 @@
+version: v1.5.2
+ignore:
+  'npm:ms:20170412':
+    - node-pre-gyp > tar-pack > debug > ms:
+        reason: low risk
+        expires: '2017-06-17T15:45:04.329Z'
+patch: {}
