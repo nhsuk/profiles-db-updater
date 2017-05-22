@@ -35,3 +35,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Other project files
+.DS_Store
+gp-data-merged.json
+gp-data.json.latest
