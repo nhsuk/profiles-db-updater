@@ -10,7 +10,7 @@ USER $USERNAME
 WORKDIR /code
 
 COPY .snyk yarn.lock package.json /code/
-RUN  yarn install --ignore-optional
+RUN if [ "$NODE_ENV" == "production" ]; then yarn install --production --ignore-optional --pure-lockfile; else yarn install --ignore-optional --pure-lockfile; fi
 
 COPY . /code
 
@@ -21,4 +21,3 @@ USER $USERNAME
 VOLUME /code/data
 
 CMD [ "node", "app" ]
-
