@@ -9,8 +9,8 @@ RUN adduser -D "$USERNAME" && \
 USER $USERNAME
 WORKDIR /code
 
-COPY .snyk yarn.lock package.json /code/
-RUN  yarn install --ignore-optional
+COPY yarn.lock package.json /code/
+RUN if [ "$NODE_ENV" == "production" ]; then yarn install --production --ignore-optional; else yarn install --ignore-optional; fi
 
 COPY . /code
 
@@ -21,4 +21,3 @@ USER $USERNAME
 VOLUME /code/data
 
 CMD [ "node", "app" ]
-

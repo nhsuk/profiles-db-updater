@@ -40,3 +40,4 @@ jspm_packages
 .DS_Store
 gp-data-merged.json
 gp-data.json.latest
+booking.json.test

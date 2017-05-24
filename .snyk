@@ -1,7 +1,9 @@
-version: v1.5.2
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:ms:20170412':
     - node-pre-gyp > tar-pack > debug > ms:
-        reason: low risk
-        expires: '2017-06-17T15:52:46.000Z'
+        reason: None given
+        expires: '2017-06-21T13:43:59.902Z'
 patch: {}

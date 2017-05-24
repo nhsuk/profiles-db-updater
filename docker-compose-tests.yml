@@ -8,7 +8,6 @@ services:
       service: base-app
     command: yarn run test-watch
     volumes:
-      - .:/code
       - profiles-db-updater-tests-node_modules:/code/node_modules
     environment:
       NODE_ENV: test
@@ -23,7 +22,6 @@ services:
     command: yarn run travis
     user: root
     volumes:
-      - .:/code
       - profiles-db-updater-tests-node_modules:/code/node_modules
     environment:
       COVERALLS_REPO_TOKEN: ${COVERALLS_REPO_TOKEN}
@@ -57,5 +55,6 @@ services:
     image: mongo:3.4
     ports:
       - 27017:27017
+
 volumes:
   profiles-db-updater-tests-node_modules:
