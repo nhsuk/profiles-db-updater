@@ -1,5 +1,5 @@
 const chai = require('chai');
-const systems = require('../../lib/systems');
+const systems = require('../../lib/merge/systems');
 
 const expect = chai.expect;
 

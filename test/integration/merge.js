@@ -1,7 +1,7 @@
 const fs = require('fs');
 const chai = require('chai');
 const config = require('../../config/config');
-const mergeFiles = require('../../lib/mergeFiles');
+const mergeFiles = require('../../lib/merge/mergeFiles');
 
 const expect = chai.expect;
 

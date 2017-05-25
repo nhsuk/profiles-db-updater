@@ -1,5 +1,5 @@
 const chai = require('chai');
-const onlineServices = require('../../lib/onlineServices');
+const onlineServices = require('../../lib/merge/onlineServices');
 
 describe('onlineServices', () => {
   describe('getBookingSystem', () => {

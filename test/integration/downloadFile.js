@@ -3,7 +3,7 @@ const fs = require('fs');
 const nock = require('nock');
 
 const downloadFile = require('../../lib/downloadFile');
-const fileHelper = require('../../lib/fileHelper');
+const fileHelper = require('../../lib/utils/fileHelper');
 const config = require('../../config/config');
 
 const expect = chai.expect;

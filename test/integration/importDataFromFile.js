@@ -1,7 +1,7 @@
 const chai = require('chai');
-const importData = require('../../lib/importData');
-const DataImporter = require('../../lib/dataImporter');
-const MongoWrapper = require('../../lib/mongoWrapper');
+const importData = require('../../lib/mongodb/importDataFromFile');
+const DataImporter = require('../../lib/mongodb/dataImporter');
+const MongoWrapper = require('../../lib/mongodb/mongoWrapper');
 const config = require('../../config/config');
 
 const expect = chai.expect;

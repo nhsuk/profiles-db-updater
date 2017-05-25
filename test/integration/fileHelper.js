@@ -1,6 +1,6 @@
 const chai = require('chai');
 
-const fileHelper = require('../../lib/fileHelper');
+const fileHelper = require('../../lib/utils/fileHelper');
 
 const expect = chai.expect;
 
