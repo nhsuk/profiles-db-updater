@@ -8,7 +8,7 @@ module.exports = {
     name: 'profiles-db-loader',
   },
   env: process.env.NODE_ENV || 'development',
-  GP_DATA_URL: process.env.GP_DATA_URL || 'http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json',
+  GP_DATA_URL: process.env.GP_DATA_URL || 'http://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json',
   POMI_BOOKING_URL: process.env.POMI_BOOKING_URL || 'http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/booking.json',
   POMI_SCRIPTS_URL: process.env.POMI_SCRIPTS_URL || 'http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/scripts.json',
   POMI_RECORDS_URL: process.env.POMI_RECORDS_URL || 'http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/records.json',
@@ -20,7 +20,7 @@ module.exports = {
   POMI_RECORDS_FILE: 'records.json',
   INPUT_DIR: './input',
   // percentage the records can drop by before erroring
-  THRESHOLD: process.env.CHANGE_THRESHOLD || 0.95,
+  THRESHOLD: process.env.CHANGE_THRESHOLD || 0.99,
   // cron style job, default to 7am
   UPDATE_SCHEDULE: process.env.UPDATE_SCHEDULE || '0 7 * * *',
 

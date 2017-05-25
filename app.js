@@ -1,6 +1,6 @@
 const updateDatabase = require('./lib/updateDatabase');
 const schedule = require('node-schedule');
-const log = require('./lib/logger');
+const log = require('./lib/utils/logger');
 const config = require('./config/config');
 
 async function runUpdater() {

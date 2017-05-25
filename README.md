@@ -188,5 +188,5 @@ the application is being run. This is best practice as described by
 | `MONGO_PORT`                     | Port of mongo server                                               | 27017                 |          |
 | `MONGO_DB`                       | Mongo database to be updated                                       | profiles              |          |
 | `MONGO_COLLECTION`               | Mongo collection to be updated                                     | gps                   |          |
-| `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.95                  |          |
+| `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
 | `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 0 7 * * *  (7 am)     |          |
