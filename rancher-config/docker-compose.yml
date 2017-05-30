@@ -1,7 +1,7 @@
 version: '2'
 services:
 
-  base-app:
+  profiles-db-updater:
     image: nhsuk/profiles-db-updater:${DOCKER_IMAGE_TAG}
     environment:
       NODE_ENV: ${NODE_ENV}
@@ -12,6 +12,8 @@ services:
       UPDATE_SCHEDULE: ${UPDATE_SCHEDULE}
     links:
     - mongo-db:mongo
+    labels:
+      io.rancher.container.pull_image: always
 
   mongo-db:
     image: mongo:3.4
