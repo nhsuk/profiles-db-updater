@@ -11,12 +11,12 @@ Currently there are 2 sources of data:
 * Patient Online Management Information (POMI) data from NHSDigital's indicator
   portal. Handled by [pomi-data-etl](https://github.com/nhsuk/pomi-data-etl)
 
-The output from the GP Data ETL is hosted at `http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json`.
+The output from the GP Data ETL is hosted at `http://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json`.
 
 The output files from the POMI DATA ETL are found at 
-`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/booking.json`,
-`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/scripts.json`
-`http://pomi-data-etl-pr-16.dev.beta.nhschoices.net/json/records.json`
+`http://pomi-data-etl.dev.beta.nhschoices.net/json/booking.json`,
+`http://pomi-data-etl.dev.beta.nhschoices.net/json/scripts.json`, and
+`http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json`
 
 The online files will be used as the source of the database update if they are available, are valid JSON, and if the
 total count has not dropped by a significant amount as described in the `CHANGE_THRESHOLD` below.
@@ -181,7 +181,10 @@ the application is being run. This is best practice as described by
 
 | Variable                         | Description                                                        | Default               | Required |
 |:---------------------------------|:-------------------------------------------------------------------|:----------------------|:---------|
-| `GP_DATA_URL`                    | URL of up to date GP data from Syndication                         | http://gp-data-etl-pr-21.dev.beta.nhschoices.net/json/gp-data.json||
+| `GP_DATA_URL`                    | URL of up to date GP data from Syndication                         | http://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json||
+| `POMI_BOOKING_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net//json/booking.json||
+| `POMI_SCRIPTS_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net/json/scripts.json||
+| `POMI_RECORDS_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json||
 | `NODE_ENV`                       | node environment                                                   | development           |          |
 | `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
 | `MONGO_HOST`                     | host name on mongo server                                          | mongo                 |          |

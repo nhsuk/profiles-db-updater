@@ -15,9 +15,8 @@ function expectSupplierToBeValid(supplier) {
     'TPP'
   ];
 
-  if (supplier.indexOf('(I)') > 0) {
-    expect(supplier).to.have.string('(I)');
-  } else {
+  // valid supplier is either in the list or contains (I)
+  if (supplier.indexOf('(I)') < 0) {
     expect(supplier).to.be.oneOf(validSuppliers);
   }
 }
