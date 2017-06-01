@@ -7,18 +7,21 @@ const expect = chai.expect;
 
 function expectSupplierToBeValid(supplier) {
   const validSuppliers = [
+    'EMIS (I)',
     'EMIS',
     'INPS',
+    'INPS (I)',
     'Informatica',
+    'Informatica (I)',
     'Microtest',
+    'Microtest (I)',
     'NK',
-    'TPP'
+    'NK (I)',
+    'TPP',
+    'TPP (I)'
   ];
 
-  // valid supplier is either in the list or contains (I)
-  if (supplier.indexOf('(I)') < 0) {
-    expect(supplier).to.be.oneOf(validSuppliers);
-  }
+  expect(supplier).to.be.oneOf(validSuppliers);
 }
 
 describe('mergeFiles', function test() {
@@ -76,9 +79,9 @@ describe('mergeFiles', function test() {
         const nintyPercentOfRawRecords = bookingItemsLength * 0.9;
 
         mergedJson.filter(filterOnlineServicesAppointments)
-        .forEach((item) => {
-          filteredSet.add(item.odsCode);
-        });
+          .forEach((item) => {
+            filteredSet.add(item.odsCode);
+          });
 
         expect(filteredSet.size).is.at.least(nintyPercentOfRawRecords);
       });
@@ -112,9 +115,9 @@ describe('mergeFiles', function test() {
         const nintyPercentOfRawRecords = scriptItemsLength * 0.9;
 
         mergedJson.filter(filterScripts)
-        .forEach((item) => {
-          filteredSet.add(item.odsCode);
-        });
+          .forEach((item) => {
+            filteredSet.add(item.odsCode);
+          });
 
         expect(filteredSet.size).is.at.least(nintyPercentOfRawRecords);
       });
@@ -148,9 +151,9 @@ describe('mergeFiles', function test() {
         const codedRecordsLength = JSON.parse(fs.readFileSync('./input/records.json', 'utf8')).length;
 
         mergedJson.filter(filterCodedRecords)
-        .forEach((item) => {
-          filteredSet.add(item.odsCode);
-        });
+          .forEach((item) => {
+            filteredSet.add(item.odsCode);
+          });
         const nintyPercentOfRawRecords = codedRecordsLength * 0.9;
 
         expect(filteredSet.size).is.at.least(nintyPercentOfRawRecords);
