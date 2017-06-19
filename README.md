@@ -193,3 +193,10 @@ the application is being run. This is best practice as described by
 | `MONGO_COLLECTION`               | Mongo collection to be updated                                     | gps                   |          |
 | `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
 | `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 0 7 * * *  (7 am)     |          |
+
+## Architecture Decision Records
+
+This repo uses
+[Architecture Decision Records](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)
+to record architectural decisions for this project.
+They are stored in [doc/architecture/decisions](doc/architecture/decisions).
