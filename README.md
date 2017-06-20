@@ -30,9 +30,9 @@ When updating the mongo database the new data will be inserted into a temporary 
 existing collection. Once validation passes the existing collection will be deleted and the temporary collection renamed
 to take it's place.
 
-Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by 
-the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.95` which prevents the data being loaded if it 
-is 5% less than the previous count.
+Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
+the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the data being loaded if it
+is less than 99% of the previous count.
 
 ## Data structure
 
@@ -193,3 +193,10 @@ the application is being run. This is best practice as described by
 | `MONGO_COLLECTION`               | Mongo collection to be updated                                     | gps                   |          |
 | `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
 | `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 0 7 * * *  (7 am)     |          |
+
+## Architecture Decision Records
+
+This repo uses
+[Architecture Decision Records](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)
+to record architectural decisions for this project.
+They are stored in [doc/architecture/decisions](doc/architecture/decisions).
