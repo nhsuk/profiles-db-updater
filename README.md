@@ -30,9 +30,9 @@ When updating the mongo database the new data will be inserted into a temporary 
 existing collection. Once validation passes the existing collection will be deleted and the temporary collection renamed
 to take it's place.
 
-Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by 
-the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.95` which prevents the data being loaded if it 
-is 5% less than the previous count.
+Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
+the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the data being loaded if it
+is less than 99% of the previous count.
 
 ## Data structure
 
