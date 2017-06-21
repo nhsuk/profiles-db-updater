@@ -4,9 +4,10 @@ services:
   profiles-etl-combiner:
     image: nhsuk/profiles-etl-combiner:${DOCKER_IMAGE_TAG}
     environment:
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: production
       UPDATE_SCHEDULE: ${UPDATE_SCHEDULE}
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      AZURE_TIMEOUT_MINUTES: ${CONTAINER_NAME}
       CONTAINER_NAME: ${CONTAINER_NAME}
     labels:
       io.rancher.container.pull_image: always
