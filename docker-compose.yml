@@ -18,13 +18,6 @@ services:
       service: base-app
     volumes:
       - profiles-etl-combiner-node_modules:/code/node_modules
-    links:
-    - mongo-db:mongo
-
-  mongo-db:
-    image: mongo:3.4
-    ports:
-      - 27017:27017
 
 volumes:
   profiles-etl-combiner-node_modules:
