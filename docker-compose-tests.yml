@@ -8,7 +8,7 @@ services:
       service: base-app
     command: yarn run test-watch
     volumes:
-      - profiles-db-updater-tests-node_modules:/code/node_modules
+      - profiles-etl-combiner-tests-node_modules:/code/node_modules
     environment:
       NODE_ENV: test
       SNYK_TOKEN: ${SNYK_TOKEN}
@@ -22,7 +22,7 @@ services:
     command: yarn run travis
     user: root
     volumes:
-      - profiles-db-updater-tests-node_modules:/code/node_modules
+      - profiles-etl-combiner-tests-node_modules:/code/node_modules
     environment:
       COVERALLS_REPO_TOKEN: ${COVERALLS_REPO_TOKEN}
       NODE_ENV: test
@@ -40,4 +40,4 @@ services:
       - 27017:27017
 
 volumes:
-  profiles-db-updater-tests-node_modules:
+  profiles-etl-combiner-tests-node_modules:

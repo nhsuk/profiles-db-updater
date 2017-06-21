@@ -1,8 +1,8 @@
 version: '2'
 services:
 
-  profiles-db-updater:
-    image: nhsuk/profiles-db-updater:${DOCKER_IMAGE_TAG}
+  profiles-etl-combiner:
+    image: nhsuk/profiles-etl-combiner:${DOCKER_IMAGE_TAG}
     environment:
       NODE_ENV: ${NODE_ENV}
       MONGO_HOST: profiles-db.profiles-db

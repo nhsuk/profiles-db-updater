@@ -9,17 +9,15 @@ services:
       - .:/code
     environment:
       NODE_ENV: ${NODE_ENV}
-      MONGO_HOST: ${MONGO_HOST}
-      MONGO_PORT: ${MONGO_PORT}
-      MONGO_DB: ${MONGO_DB}
-      MONGO_COLLECTION: ${MONGO_COLLECTION}
       UPDATE_SCHEDULE: ${UPDATE_SCHEDULE}
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
 
-  profiles-db-updater:
+  profiles-etl-combiner:
     extends:
       service: base-app
     volumes:
-      - profiles-db-updater-node_modules:/code/node_modules
+      - profiles-etl-combiner-node_modules:/code/node_modules
     links:
     - mongo-db:mongo
 
@@ -29,4 +27,4 @@ services:
       - 27017:27017
 
 volumes:
-  profiles-db-updater-node_modules:
+  profiles-etl-combiner-node_modules:
