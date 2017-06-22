@@ -190,7 +190,7 @@ the application is being run. This is best practice as described by
 | `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
 | `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
 | `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 15 7 * * * (7:15 am)  |          |
-| `AZURE_STORAGE_CONNECTION_STRING`| Azure storage connection string                                    |                       | yes      |
+| `AZURE_STORAGE_CONNECTION_STRING`| Azure storage connection string                                    | This value is secret and can be currently be found in the profiles-etl-combiner env settings in the secrets repo | yes      |
 | `CONTAINER_NAME`                 | Azure storage container name                                       | etl-output            |          |
 | `AZURE_TIMEOUT_MINUTES`          | Timeout in minutes before file upload errors                       | 5                     |          |
 
