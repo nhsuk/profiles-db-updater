@@ -1,7 +1,7 @@
-# Dockerised repo for loading GP profile data into a MongoDB container
+# Dockerised repo for combining nightly ETL output
 
-The profiles-db-updater is a dockerised application that will update a mongo database on a regular basis from the output
-of the GP data and POMI data ETLs.
+The profiles-etl-combiner is a dockerised application that will merge and upload to Azure blob storage the output
+of the GP and POMI data ETLs on a regular basis.
 
 ## Merging data from multiple sources
 
@@ -18,26 +18,27 @@ The output files from the POMI DATA ETL are found at
 `http://pomi-data-etl.dev.beta.nhschoices.net/json/scripts.json`, and
 `http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json`
 
-The online files will be used as the source of the database update if they are available, are valid JSON, and if the
+The online files will be used as the source of the merged data if they are available, are valid JSON, and if the
 total count has not dropped by a significant amount as described in the `CHANGE_THRESHOLD` below.
 If these conditions are not met, the previously downloaded files will be used.
 
-The application will download, combine and enrich the ETL JSON, insert it into a mongodb database on startup, then on a daily
-schedule while the container continues to run. The time of day defaults to 7am, and can be changed via the `UPDATE_SCHEDULE` 
+The application will download, combine and enrich the ETL JSON, upload it into Azure blob storage on startup, then on a daily
+schedule while the container continues to run. The time of day defaults to 7:15am, and can be changed via the `UPDATE_SCHEDULE` 
 environment variable.
 
-When updating the mongo database the new data will be inserted into a temporary collection, then validated against the
-existing collection. Once validation passes the existing collection will be deleted and the temporary collection renamed
-to take it's place.
-
-Validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
-the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the data being loaded if it
+JSON fle validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
+the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the file being used if it
 is less than 99% of the previous count.
+
+## Azure Blob Storage
+
+No facility is provided to interrogate the contents of the blob storage. However, if the recommended environment variables are used
+all uploaded files are available at the address, `https://nhsukgpdataetl.blob.core.windows.net/etl-output`,
+i.e. [https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json](https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json).
 
 ## Data structure
 
-An example of the structure of the data stored in MongoDB can be found in the
-[Sample GP Data](sample-gp-data.json)
+An example of the merged JSON can be found in the [Sample GP Data](sample-gp-data.json)
 
 The more interesting members are described below:
 
@@ -187,12 +188,11 @@ the application is being run. This is best practice as described by
 | `POMI_RECORDS_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json||
 | `NODE_ENV`                       | node environment                                                   | development           |          |
 | `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
-| `MONGO_HOST`                     | host name on mongo server                                          | mongo                 |          |
-| `MONGO_PORT`                     | Port of mongo server                                               | 27017                 |          |
-| `MONGO_DB`                       | Mongo database to be updated                                       | profiles              |          |
-| `MONGO_COLLECTION`               | Mongo collection to be updated                                     | gps                   |          |
 | `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
-| `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 0 7 * * *  (7 am)     |          |
+| `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 15 7 * * * (7:15 am)  |          |
+| `AZURE_STORAGE_CONNECTION_STRING`| Azure storage connection string                                    | This value is secret and can be currently be found in the profiles-etl-combiner env settings in the secrets repo | yes      |
+| `CONTAINER_NAME`                 | Azure storage container name                                       | etl-output            |          |
+| `AZURE_TIMEOUT_MINUTES`          | Timeout in minutes before file upload errors                       | 5                     |          |
 
 ## Architecture Decision Records
 
