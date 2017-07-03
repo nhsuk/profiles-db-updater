@@ -14,7 +14,7 @@ const url = config.POMI_BOOKING_URL;
 
 describe('Download ETL files', () => {
   it('should download ETL file to input folder', function test(done) {
-    this.timeout(30000);
+    this.timeout(60000);
     const testFilename = `${config.POMI_BOOKING_FILE}.test`;
     const testFilePath = `${config.INPUT_DIR}/${testFilename}`;
     downloadFile(url, testFilename)
