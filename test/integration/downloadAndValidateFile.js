@@ -2,7 +2,7 @@ const chai = require('chai');
 const fs = require('fs');
 const nock = require('nock');
 
-const downloadFile = require('../../lib/downloadFile');
+const downloadAndValidateFile = require('../../lib/downloadAndValidateFile');
 const fileHelper = require('../../lib/utils/fileHelper');
 const config = require('../../config/config');
 
@@ -13,11 +13,19 @@ const filePath = `${config.INPUT_DIR}/${filename}`;
 const url = config.POMI_BOOKING_URL;
 
 describe('Download ETL files', () => {
-  it('should download ETL file to input folder', function test(done) {
-    this.timeout(60000);
+  after(() => {
+    nock.cleanAll();
+    nock.restore();
+  });
+
+  it('should download ETL file to input folder', (done) => {
+    const singleRecordString = '[{"PeriodEnd": "28/02/2017","GPPracticeCode": "P87668","Supplier": "INPS"}]';
+    nock(url)
+      .get('')
+      .reply(200, singleRecordString);
     const testFilename = `${config.POMI_BOOKING_FILE}.test`;
     const testFilePath = `${config.INPUT_DIR}/${testFilename}`;
-    downloadFile(url, testFilename)
+    downloadAndValidateFile(url, testFilename)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(testFilePath)).to.be.true;
@@ -30,7 +38,7 @@ describe('Download ETL files', () => {
       .get('')
       .reply(200, 'bad json');
 
-    downloadFile(url, filename)
+    downloadAndValidateFile(url, filename)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(filePath)).to.be.true;
@@ -45,7 +53,7 @@ describe('Download ETL files', () => {
       .get('')
       .reply(200, '[]');
 
-    downloadFile(url, filename)
+    downloadAndValidateFile(url, filename)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(filePath)).to.be.true;
@@ -62,7 +70,7 @@ describe('Download ETL files', () => {
       .get('')
       .replyWithError('download throws error');
 
-    downloadFile(url, filename)
+    downloadAndValidateFile(url, filename)
       .then(() => {
         // eslint-disable-next-line no-unused-expressions
         expect(fs.existsSync(filePath)).to.be.true;
