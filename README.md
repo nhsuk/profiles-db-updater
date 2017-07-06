@@ -2,7 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/profiles-etl-combiner.svg)](https://greenkeeper.io/)
 
-The profiles-etl-combiner is a dockerised application that will merge and upload to Azure blob storage the output
+> The profiles-etl-combiner is a dockerised application that will merge and upload to Azure blob storage the output
 of the GP and POMI data ETLs on a regular basis.
 
 ## Merging data from multiple sources
@@ -28,7 +28,7 @@ The application will download, combine and enrich the ETL JSON, upload it into A
 schedule while the container continues to run. The time of day defaults to 7:15am, and can be changed via the `UPDATE_SCHEDULE` 
 environment variable.
 
-JSON fle validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
+JSON file validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
 the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the file being used if it
 is less than 99% of the previous count.
 
@@ -170,7 +170,7 @@ information.  `gpReferralRequired` will be either `true` or `false`.
 `availabilityTimes` and `introduction` are optional.
 All other members will be present and populated.
 
-## Interrogating the json with [jq](https://stedolan.github.io/jq/)
+## Interrogating the JSON with [jq](https://stedolan.github.io/jq/)
 
 * List suppliers: `jq -c 'unique_by(.Supplier) | [.[].Supplier]' input/pomi.json`
 * Find single item by `odsCode`:
@@ -182,19 +182,19 @@ Environment variables are expected to be managed by the environment in which
 the application is being run. This is best practice as described by
 [twelve-factor](https://12factor.net/config).
 
-| Variable                         | Description                                                        | Default               | Required |
-|:---------------------------------|:-------------------------------------------------------------------|:----------------------|:---------|
-| `GP_DATA_URL`                    | URL of up to date GP data from Syndication                         | http://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json||
-| `POMI_BOOKING_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net//json/booking.json||
-| `POMI_SCRIPTS_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net/json/scripts.json||
-| `POMI_RECORDS_URL`                    | URL of up to date GP data from POMI                         | http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json||
-| `NODE_ENV`                       | node environment                                                   | development           |          |
-| `LOG_LEVEL`                      | [log level](https://github.com/trentm/node-bunyan#levels)          | Depends on `NODE_ENV` |          |
-| `CHANGE_THRESHOLD`               | Factor the data count can drop by before erroring                  | 0.99                  |          |
-| `UPDATE_SCHEDULE`                | time of day to run the upgrade                                     | 15 7 * * * (7:15 am)  |          |
-| `AZURE_STORAGE_CONNECTION_STRING`| Azure storage connection string                                    | This value is secret and can be currently be found in the profiles-etl-combiner env settings in the secrets repo | yes      |
-| `CONTAINER_NAME`                 | Azure storage container name                                       | etl-output            |          |
-| `AZURE_TIMEOUT_MINUTES`          | Timeout in minutes before file upload errors                       | 5                     |          |
+| Variable                           | Description                                                          | Default                                                                                                          | Required   |
+| :--------------------------------- | :------------------------------------------------------------------- | :----------------------                                                                                          | :--------- |
+| `GP_DATA_URL`                      | URL of up to date GP data from Syndication                           | http://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json                                                     |            |
+| `POMI_BOOKING_URL`                 | URL of up to date GP data from POMI                                  | http://pomi-data-etl.dev.beta.nhschoices.net//json/booking.json                                                  |            |
+| `POMI_SCRIPTS_URL`                 | URL of up to date GP data from POMI                                  | http://pomi-data-etl.dev.beta.nhschoices.net/json/scripts.json                                                   |            |
+| `POMI_RECORDS_URL`                 | URL of up to date GP data from POMI                                  | http://pomi-data-etl.dev.beta.nhschoices.net/json/records.json                                                   |            |
+| `NODE_ENV`                         | node environment                                                     | development                                                                                                      |            |
+| `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)            | Depends on `NODE_ENV`                                                                                            |            |
+| `CHANGE_THRESHOLD`                 | Factor the data count can drop by before an error is reported        | 0.99                                                                                                             |            |
+| `UPDATE_SCHEDULE`                  | time of day to run the upgrade                                       | 15 7 * * * (7:15 am)                                                                                             |            |
+| `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                      | This value is secret and can be currently be found in the profiles-etl-combiner env settings in the secrets repo | yes        |
+| `CONTAINER_NAME`                   | Azure storage container name                                         | etl-output                                                                                                       |            |
+| `AZURE_TIMEOUT_MINUTES`            | Timeout in minutes before file upload errors                         | 5                                                                                                                |            |
 
 ## Architecture Decision Records
 
