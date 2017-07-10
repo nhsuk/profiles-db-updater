@@ -11,14 +11,3 @@ services:
       CONTAINER_NAME: ${CONTAINER_NAME}
     labels:
       io.rancher.container.pull_image: always
-    logging:
-      driver: splunk
-      options:
-        splunk-url: ${SPLUNK_HEC_URL}
-        splunk-token: ${SPLUNK_HEC_TOKEN}
-        splunk-insecureskipverify: "true"
-        splunk-sourcetype: docker
-        splunk-source: profiles-etl-combiner
-        splunk-verify-connection: "false"
-        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
-        splunk-format: json
