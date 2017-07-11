@@ -19,4 +19,4 @@ after_script:
   - docker-compose -f docker-compose-tests.yml down -v
 
 after_success:
-  - bash ./scripts/ci-deployment/deploy.sh
+  - bash ./scripts/deploy.sh
