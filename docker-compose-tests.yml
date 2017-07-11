@@ -16,7 +16,7 @@ services:
     extends:
       file: docker-compose.yml
       service: base-app
-    command: yarn travis
+    command: yarn test-ci
     user: root
     volumes:
       - profiles-etl-combiner-tests-node_modules:/code/node_modules
