@@ -1,6 +1,7 @@
 # Dockerised repo for combining nightly ETL output
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/profiles-etl-combiner.svg)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/nhsuk/profiles-etl-combiner/badge.svg)](https://snyk.io/test/github/nhsuk/profiles-etl-combiner)
 
 > The profiles-etl-combiner is a dockerised application that will merge and upload to Azure blob storage the output
 of the GP and POMI data ETLs on a regular basis.
