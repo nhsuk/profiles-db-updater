@@ -3,15 +3,41 @@ const onlineServices = require('../../lib/merge/onlineServices');
 
 describe('onlineServices', () => {
   describe('getBookingSystem', () => {
-    const throwsError = () => {
+    it('should throw error for unknown service', () => {
+      const throwsError = () => {
+        onlineServices.add(
+          {
+            systemList: [{ GPPracticeCode: 'test' }],
+            gp: { odsCode: 'test' },
+            key: 'noSuchKey'
+          }
+        );
+      };
+      chai.assert.throws(throwsError, Error, 'Unknown key: noSuchKey');
+    });
+
+    it('should add supplier for known service', () => {
+      const supplier = 'EMIS';
+      const gp = {
+        odsCode: 'test',
+        contact: {
+          website: 'http://fakesite'
+        },
+        onlineServices: {}
+      };
+
       onlineServices.add(
         {
-          systemList: [{ GPPracticeCode: 'test' }],
-          gp: { odsCode: 'test' },
-          key: 'noSuchKey'
+          systemList: [{
+            Supplier: supplier,
+            GPPracticeCode: 'test'
+          }],
+          gp,
+          key: 'appointments'
         }
       );
-    };
-    chai.assert.throws(throwsError, Error, 'Unknown key: noSuchKey');
+
+      chai.expect(gp.onlineServices.appointments.supplier).to.equal(supplier);
+    });
   });
 });
