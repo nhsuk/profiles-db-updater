@@ -15,12 +15,12 @@ Currently there are 2 sources of data:
   portal. Handled by [pomi-data-etl](https://github.com/nhsuk/pomi-data-etl)
 
 The output from the GP Data ETL is hosted at
-* [https://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json](https://gp-data-etl.dev.beta.nhschoices.net/json/gp-data.json)
+* [https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data.json](https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data.json)
 
 The output files from the POMI DATA ETL are found at
-* [https://gp-data-etl.dev.beta.nhschoices.net/json/booking.json](https://gp-data-etl.dev.beta.nhschoices.net/json/booking.json)
-* [https://gp-data-etl.dev.beta.nhschoices.net/json/scripts.json](https://gp-data-etl.dev.beta.nhschoices.net/json/scripts.json)
-* [https://gp-data-etl.dev.beta.nhschoices.net/json/records.json](https://gp-data-etl.dev.beta.nhschoices.net/json/records.json)
+* [https://nhsukpomidataetl.blob.core.windows.net/etl-output/booking.json](https://nhsukpomidataetl.blob.core.windows.net/etl-output/booking.json)
+* [https://nhsukpomidataetl.blob.core.windows.net/etl-output/scripts.json](https://nhsukpomidataetl.blob.core.windows.net/etl-output/scripts.json)
+* [https://nhsukpomidataetl.blob.core.windows.net/etl-output/records.json](https://nhsukpomidataetl.blob.core.windows.net/etl-output/records.json)
 
 The online files will be used as the source of the merged data if they are available, are valid JSON, and if the
 total count has not dropped by a significant amount as described in the `CHANGE_THRESHOLD` below.
@@ -36,9 +36,10 @@ is less than 99% of the previous count.
 
 ## Azure Blob Storage
 
-No facility is provided to interrogate the contents of the blob storage. However, if the recommended environment variables are used
-all uploaded files are available at the address, `https://nhsukgpdataetl.blob.core.windows.net/etl-output`,
-i.e. [https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json](https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json).
+If the recommended environment variables are used the uploaded file is available at the address
+ * [https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json](https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data-merged.json).
+
+The [Microsoft Azure Storage Explorer](http://storageexplorer.com/) may be used to browse the contents of blob storage.
 
 ## Data structure
 
@@ -187,9 +188,9 @@ the application is being run. This is best practice as described by
 | Variable                           | Description                                                          | Default                                                                                                          | Required   |
 | :--------------------------------- | :------------------------------------------------------------------- | :----------------------                                                                                          | :--------- |
 | `GP_DATA_URL`                      | URL of up to date GP data from Syndication                           | https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data.json                                                     |            |
-| `POMI_BOOKING_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukgpdataetl.blob.core.windows.net/etl-output//booking.json                                                  |            |
-| `POMI_SCRIPTS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukgpdataetl.blob.core.windows.net/etl-output/scripts.json                                                   |            |
-| `POMI_RECORDS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukgpdataetl.blob.core.windows.net/etl-output/records.json                                                   |            |
+| `POMI_BOOKING_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/booking.json                                                  |            |
+| `POMI_SCRIPTS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/scripts.json                                                   |            |
+| `POMI_RECORDS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/records.json                                                   |            |
 | `NODE_ENV`                         | node environment                                                     | development                                                                                                      |            |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)            | Depends on `NODE_ENV`                                                                                            |            |
 | `CHANGE_THRESHOLD`                 | Factor the data count can drop by before an error is reported        | 0.99                                                                                                             |            |
