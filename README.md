@@ -1,5 +1,6 @@
 # Dockerised repo for combining nightly ETL output
 
+[![GitHub Release](https://img.shields.io/github/release/nhsuk/profiles-etl-combiner.svg)](https://github.com/nhsuk/profiles-etl-combiner/releases/latest/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/profiles-etl-combiner.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/nhsuk/profiles-etl-combiner/badge.svg)](https://snyk.io/test/github/nhsuk/profiles-etl-combiner)
 
