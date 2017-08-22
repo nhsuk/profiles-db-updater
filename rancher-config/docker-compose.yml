@@ -13,6 +13,7 @@ services:
       POMI_SCRIPTS_URL: ${POMI_SCRIPTS_URL}
       POMI_RECORDS_URL: ${POMI_RECORDS_URL}
       GP_DATA_URL: ${GP_DATA_URL}
+      CHANGE_THRESHOLD: ${CHANGE_THRESHOLD}
     labels:
       io.rancher.container.pull_image: always
     logging:
