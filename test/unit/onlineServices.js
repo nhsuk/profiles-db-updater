@@ -5,13 +5,11 @@ describe('onlineServices', () => {
   describe('getBookingSystem', () => {
     it('should throw error for unknown service', () => {
       const throwsError = () => {
-        onlineServices.add(
-          {
-            systemList: [{ GPPracticeCode: 'test' }],
-            gp: { odsCode: 'test' },
-            key: 'noSuchKey'
-          }
-        );
+        onlineServices.add({
+          systemList: [{ GPPracticeCode: 'test' }],
+          gp: { odsCode: 'test' },
+          key: 'noSuchKey'
+        });
       };
       chai.assert.throws(throwsError, Error, 'Unknown key: noSuchKey');
     });
@@ -26,16 +24,14 @@ describe('onlineServices', () => {
         onlineServices: {}
       };
 
-      onlineServices.add(
-        {
-          systemList: [{
-            Supplier: supplier,
-            GPPracticeCode: 'test'
-          }],
-          gp,
-          key: 'appointments'
-        }
-      );
+      onlineServices.add({
+        systemList: [{
+          Supplier: supplier,
+          GPPracticeCode: 'test'
+        }],
+        gp,
+        key: 'appointments'
+      });
 
       chai.expect(gp.onlineServices.appointments.supplier).to.equal(supplier);
     });
