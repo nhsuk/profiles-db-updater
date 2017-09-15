@@ -1,14 +1,16 @@
 const mergeEtlOutput = require('./lib/mergeEtlOutput');
 const schedule = require('node-schedule');
 const log = require('./lib/utils/logger');
-const config = require('./config/config');
+const scheduleConfig = require('./config/scheduleConfig');
 
 async function runUpdater() {
-  // run on initial start, then on the schedule
-  await mergeEtlOutput();
+  if (!scheduleConfig.schedulerDisabled()) {
+    // run on initial start, then on the schedule
+    await mergeEtlOutput();
+  }
 
-  log.info(`Scheduling profiles etl merge with rule '${config.UPDATE_SCHEDULE}'`);
-  schedule.scheduleJob(config.UPDATE_SCHEDULE, () => {
+  log.info(`Scheduling profiles etl merge with rule '${scheduleConfig.getSchedule()}'`);
+  schedule.scheduleJob(scheduleConfig.getSchedule(), () => {
     // this is an async function, but await is not allowed within a lambda expression
     mergeEtlOutput();
   });
