@@ -1,7 +1,7 @@
 {
   "name": "profiles-etl-combiner",
-  "version": "1.0.0",
-  "description": "Retrieves JSON from ETLs, combines the JSON and imports into mongodb",
+  "version": "1.1.0",
+  "description": "Retrieves JSON from ETLs, combines the JSON and writes to Azure blob storage",
   "main": "app.js",
   "scripts": {
     "coverage-check": "istanbul check-coverage --config .istanbul.yml",
@@ -25,7 +25,7 @@
     "test-watch-local": "MONGO_HOST=localhost yarn test -- --watch --reporter min"
   },
   "keywords": [
-    "mongodb",
+    "azure",
     "nhsuk"
   ],
   "author": "Mark Harrop",

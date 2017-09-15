@@ -31,6 +31,10 @@ The application will download, combine and enrich the ETL JSON, upload it into A
 schedule while the container continues to run. The time of day defaults to 7:15am, and can be changed via the `UPDATE_SCHEDULE` 
 environment variable.
 
+Further details on the time format are available at [here](https://www.npmjs.com/package/node-schedule)
+
+The scheduler can be completely disabled by setting the `DISABLE_SCHEDULER` variable to `true`. This sets the run date to run once in the future on Jan 1st, 2100.
+
 JSON file validation will fail if the count of records drops significantly. The allowable drop in record count is controlled by
 the `CHANGE_THRESHOLD` environment variable. By default this is set to `0.99` which prevents the file being used if it
 is less than 99% of the previous count.
@@ -188,14 +192,15 @@ the application is being run. This is best practice as described by
 
 | Variable                           | Description                                                          | Default                                                                                                          | Required   |
 | :--------------------------------- | :------------------------------------------------------------------- | :----------------------                                                                                          | :--------- |
-| `GP_DATA_URL`                      | URL of up to date GP data from Syndication                           | https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data.json                                                     |            |
-| `POMI_BOOKING_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/booking.json                                                  |            |
-| `POMI_SCRIPTS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/scripts.json                                                   |            |
-| `POMI_RECORDS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/records.json                                                   |            |
+| `GP_DATA_URL`                      | URL of up to date GP data from Syndication                           | https://nhsukgpdataetl.blob.core.windows.net/etl-output/gp-data.json                                             |            |
+| `POMI_BOOKING_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/booking.json                                           |            |
+| `POMI_SCRIPTS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/scripts.json                                           |            |
+| `POMI_RECORDS_URL`                 | URL of up to date GP data from POMI                                  | https://nhsukpomidataetl.blob.core.windows.net/etl-output/records.json                                           |            |
 | `NODE_ENV`                         | node environment                                                     | development                                                                                                      |            |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)            | Depends on `NODE_ENV`                                                                                            |            |
 | `CHANGE_THRESHOLD`                 | Factor the data count can drop by before an error is reported        | 0.99                                                                                                             |            |
 | `UPDATE_SCHEDULE`                  | time of day to run the upgrade                                       | 15 7 * * * (7:15 am)                                                                                             |            |
+| `DISABLE_SCHEDULER`                | set to 'true' to disable the scheduler                               | false                                                                                                            |            |
 | `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                      | This value is secret and can be currently be found in the profiles-etl-combiner env settings in the secrets repo | yes        |
 | `CONTAINER_NAME`                   | Azure storage container name                                         | etl-output                                                                                                       |            |
 | `AZURE_TIMEOUT_MINUTES`            | Timeout in minutes before file upload errors                         | 5                                                                                                                |            |

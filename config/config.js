@@ -17,6 +17,4 @@ module.exports = {
   INPUT_DIR: './input',
   // percentage the records can drop by before erroring
   THRESHOLD: Number(process.env.CHANGE_THRESHOLD) || 0.99,
-  // cron style job, default to 7:15am
-  UPDATE_SCHEDULE: process.env.UPDATE_SCHEDULE || '15 7 * * *',
 };
