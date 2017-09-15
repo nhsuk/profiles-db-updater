@@ -14,7 +14,6 @@ function resetEnv() {
 describe('getSchedule', () => {
   it('should return a date far in the future when scheduler disabled', () => {
     process.env.DISABLE_SCHEDULER = 'true';
-    expect(config.getSchedule()).to.be.a('Date');
     expect(config.getSchedule()).to.equal(config.farFutureDate);
     expect(config.getSchedule().getFullYear()).to.equal(2100);
   });

@@ -10,9 +10,8 @@ async function runUpdater() {
   }
 
   log.info(`Scheduling profiles etl merge with rule '${scheduleConfig.getSchedule()}'`);
-  schedule.scheduleJob(scheduleConfig.getSchedule(), () => {
-    // this is an async function, but await is not allowed within a lambda expression
-    mergeEtlOutput();
+  schedule.scheduleJob(scheduleConfig.getSchedule(), async () => {
+    await mergeEtlOutput();
   });
 }
 
