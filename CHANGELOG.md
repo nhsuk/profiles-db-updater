@@ -1,3 +1,7 @@
+1.2.0 / TBC
+==================
+- Update dependencies
+
 1.1.0 / 2017-09-15
 ==================
 - Introduce (true/false) env var (`DISABLE_SCHEDULER`) to suspend running of application
