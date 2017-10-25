@@ -1,6 +1,7 @@
-1.2.0 / TBC
+1.2.0 / 2017-10-26
 ==================
-- Update dependencies
+- Upgrade Docker container to `node:8.8.0-alpine`
+- Update npm dependencies
 
 1.1.0 / 2017-09-15
 ==================
