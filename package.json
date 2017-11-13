@@ -1,13 +1,13 @@
 {
   "name": "profiles-etl-combiner",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Retrieves JSON from ETLs, combines the JSON and writes to Azure blob storage",
   "main": "app.js",
   "scripts": {
     "coverage-check": "istanbul check-coverage --config .istanbul.yml",
     "coverage-check-unit": "istanbul check-coverage --config .istanbul.unit.yml",
-    "coverage-generate-unit": "yarn istanbul -- cover _mocha -- --recursive test/unit",
-    "coverage-generate": "yarn istanbul -- cover _mocha -- --recursive",
+    "coverage-generate-unit": "yarn istanbul cover -- _mocha -- --recursive test/unit",
+    "coverage-generate": "yarn istanbul cover -- _mocha -- --recursive",
     "coverage-upload-coveralls": "cat ./coverage/lcov.info | coveralls",
     "git-hook": "yarn lint && yarn coverage-generate-unit && yarn coverage-check-unit",
     "istanbul": "NODE_ENV=test istanbul",
@@ -21,8 +21,8 @@
     "test-ci": "yarn lint && yarn coverage-generate && yarn coverage-check && yarn coverage-upload-coveralls",
     "test-integration": "NODE_ENV=test mocha --recursive test/integration",
     "test-unit": "NODE_ENV=test mocha --recursive test/unit",
-    "test-watch": "yarn test -- --watch --reporter min",
-    "test-watch-local": "MONGO_HOST=localhost yarn test -- --watch --reporter min"
+    "test-watch": "yarn test --watch --reporter min",
+    "test-watch-local": "MONGO_HOST=localhost yarn test --watch --reporter min"
   },
   "keywords": [
     "azure",
