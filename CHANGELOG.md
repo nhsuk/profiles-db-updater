@@ -1,3 +1,7 @@
+1.4.0 / TBD
+==================
+- Upgrade to `eslint-config-nhsuk@0.13.0` and apply fixes
+
 1.3.0 / 2017-11-16
 ==================
 - Upgrade Docker container to `node:8.9.1-alpine`

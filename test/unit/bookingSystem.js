@@ -10,14 +10,14 @@ describe('systems', () => {
 
     function getBaseBookingSystemData(supplier) {
       return {
-        PeriodEnd: '31/12/2016',
         GPPracticeCode: odsCode,
+        PeriodEnd: '31/12/2016',
         Supplier: supplier,
       };
     }
 
     function getBaseGpData() {
-      return { odsCode, contact: {} };
+      return { contact: {}, odsCode };
     }
 
     describe('edge cases', () => {

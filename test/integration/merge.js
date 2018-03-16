@@ -18,7 +18,7 @@ function expectSupplierToBeValid(supplier) {
     'NK',
     'NK (I)',
     'TPP',
-    'TPP (I)'
+    'TPP (I)',
   ];
 
   expect(supplier).to.be.oneOf(validSuppliers);
@@ -45,7 +45,7 @@ describe('mergeFiles', function test() {
       'INPS',
       'Informatica',
       'Microtest',
-      'TPP'
+      'TPP',
     ];
 
     it('should produce a merged file with the same number of records as the gp-data file', () => {
@@ -64,7 +64,7 @@ describe('mergeFiles', function test() {
           'location',
           'name',
           'odsCode',
-          'syndicationId'
+          'syndicationId',
         ];
         expect(item).to.contain.all.keys(requiredKeys);
       });

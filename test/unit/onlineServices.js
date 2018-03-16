@@ -6,9 +6,9 @@ describe('onlineServices', () => {
     it('should throw error for unknown service', () => {
       const throwsError = () => {
         onlineServices.add({
-          systemList: [{ GPPracticeCode: 'test' }],
           gp: { odsCode: 'test' },
-          key: 'noSuchKey'
+          key: 'noSuchKey',
+          systemList: [{ GPPracticeCode: 'test' }],
         });
       };
       chai.assert.throws(throwsError, Error, 'Unknown key: noSuchKey');
@@ -17,20 +17,20 @@ describe('onlineServices', () => {
     it('should add supplier for known service', () => {
       const supplier = 'EMIS';
       const gp = {
-        odsCode: 'test',
         contact: {
-          website: 'http://fakesite'
+          website: 'http://fakesite',
         },
-        onlineServices: {}
+        odsCode: 'test',
+        onlineServices: {},
       };
 
       onlineServices.add({
-        systemList: [{
-          Supplier: supplier,
-          GPPracticeCode: 'test'
-        }],
         gp,
-        key: 'appointments'
+        key: 'appointments',
+        systemList: [{
+          GPPracticeCode: 'test',
+          Supplier: supplier,
+        }],
       });
 
       chai.expect(gp.onlineServices.appointments.supplier).to.equal(supplier);
